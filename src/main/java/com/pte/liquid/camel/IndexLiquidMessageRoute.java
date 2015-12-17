@@ -32,7 +32,7 @@ public class IndexLiquidMessageRoute extends RouteBuilder{
     	Processor convertMessageJsonProcessor = new ConvertMessageJsonProcessor();
     	
     	jaxb.setContextPath("com.pte.liquid.relay.model");    	
-    	from("jms:queue:com.pte.liquid.relay.in").unmarshal(jaxb).process(convertMessageJsonProcessor).to("elasticsearch://{{liquid.elastic.cluster.name}}?transportAddresses={{liquid.elastic.addresses}}&operation=INDEX&indexName=sonic&indexType=liquid_elastic");
+    	from("jms:queue:com.pte.liquid.relay.in").unmarshal(jaxb).process(convertMessageJsonProcessor).to("elasticsearch://{{liquid.elastic.cluster.name}}?transportAddresses={{liquid.elastic.addresses}}&operation=INDEX&indexName={{liquid.elastic.index.name}}&indexType=liquid_elastic");
     }
 
 }
