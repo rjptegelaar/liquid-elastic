@@ -4,28 +4,38 @@
 		"liquid_elastic":{
 			"properties":{
 				"CorrelationID":{
-					"type":"string"
+					"type":"string",
+					"index":"not_analyzed"
 				},
 				"Header":{
 					"properties":{
 						"key":{
-							"type":"string"
+							"type":"string",
+							"index":"not_analyzed"
 						},
 						"messageid":{
-							"type":"string"
+							"type":"string",
+							"index":"not_analyzed"
 						},
 						"value":{
-							"type":"string"
+							"type":"string",
+							"index":"not_analyzed"
 						}
 						
 					}
 					
 				},
 				"ID":{
-					"type":"string"
+					"type":"string",
+					"index":"not_analyzed"
 				},
 				"Location":{
-					"type":"string"
+					"type":"string",
+					"index":"not_analyzed"
+				},
+				"LocationArray":{
+					"type":"string",
+					"index":"not_analyzed"
 				},
 				"NumberOfTimesCrawled":{
 					"type":"long"
@@ -34,21 +44,25 @@
 					"type":"long"
 				},
 				"ParentID":{
-					"type":"string"
+					"type":"string",
+					"index":"not_analyzed"
 				},
 				"Part":{
 					"properties":{
 						"Content":{
-							"type":"string"
+							"type":"string",
+							"index":"not_analyzed"
 						},
 						"index":{
 							"type":"long"
 						},
 						"label":{
-							"type":"string"
+							"type":"string",
+							"index":"not_analyzed"
 						},
 						"messageid":{
-							"type":"string"
+							"type":"string",
+							"index":"not_analyzed"
 						}
 						
 					}
