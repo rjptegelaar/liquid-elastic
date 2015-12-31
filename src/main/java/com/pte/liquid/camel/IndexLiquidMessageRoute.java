@@ -14,12 +14,8 @@
 //limitations under the License.
 package com.pte.liquid.camel;
 
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.dataformat.JaxbDataFormat;
 import org.springframework.stereotype.Component;
-
-import com.pte.liquid.camel.processors.ConvertMessageJsonProcessor;
 
 
 @Component
@@ -27,12 +23,8 @@ public class IndexLiquidMessageRoute extends RouteBuilder{
 
 	
     @Override
-    public void configure() throws Exception {
-    	JaxbDataFormat jaxb = new JaxbDataFormat();
-    	Processor convertMessageJsonProcessor = new ConvertMessageJsonProcessor();
-    	
-    	jaxb.setContextPath("com.pte.liquid.relay.model");    	
-    	from("jms:queue:com.pte.liquid.relay.in").unmarshal(jaxb).process(convertMessageJsonProcessor).to("elasticsearch://{{liquid.elastic.cluster.name}}?transportAddresses={{liquid.elastic.addresses}}&operation=INDEX&indexName={{liquid.elastic.index.name}}&indexType=liquid_elastic");
+    public void configure() throws Exception {    	
+    	from("jms:queue:com.pte.liquid.relay.in").convertBodyTo(String.class).to("elasticsearch://{{liquid.elastic.cluster.name}}?transportAddresses={{liquid.elastic.addresses}}&operation=INDEX&indexName={{liquid.elastic.index.name}}&indexType=liquid_elastic");
     }
 
 }

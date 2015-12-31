@@ -23,19 +23,35 @@
 		<amq:transportConnectors>
 			<amq:transportConnector uri="tcp://0.0.0.0:${liquid.elastic.broker.jms.port}?wireFormat.maxInactivityDuration=30000&amp;wireFormat.maxInactivityDurationInitalDelay=10000" id="liquidElasticConnector"/>			
 		</amq:transportConnectors>
-
+		<amq:plugins>
+			<amq:simpleAuthenticationPlugin anonymousAccessAllowed="false">
+				<amq:users>
+					<amq:authenticationUser groups="admins" username="${liquid.elastic.admin.username}" password="${liquid.elastic.admin.password}"/>
+				</amq:users>				
+			</amq:simpleAuthenticationPlugin>
+			<amq:authorizationPlugin>			
+		        <amq:map>
+		        	<amq:authorizationMap>		          
+		            <amq:authorizationEntries>
+		              <amq:authorizationEntry queue="com.pte.liquid.relay.in" read="admins" write="admins" admin="admins" />		              
+		              <amq:authorizationEntry topic="ActiveMQ.Advisory.>" read="admins" write="admins" admin="admins" />		              		             
+		            </amq:authorizationEntries>
+		          </amq:authorizationMap>
+		        </amq:map>			
+			</amq:authorizationPlugin>
+		</amq:plugins>
 	</amq:broker>
 
-	<amq:connectionFactory id="liquidElasticJmsFactory" brokerURL="${liquid.elastic.client.jms.url}" />
+	<amq:connectionFactory id="liquidElasticJmsFactory" brokerURL="${liquid.elastic.client.jms.url}" userName="${liquid.elastic.admin.username}" password="${liquid.elastic.admin.password}"/>
 
 	<bean id="liquidElasticSingleConnectionFactory"
-		class="org.springframework.jms.connection.SingleConnectionFactory">
+		class="org.springframework.jms.connection.SingleConnectionFactory" >
 		<property name="targetConnectionFactory" ref="liquidElasticJmsFactory" />
 		<property name="reconnectOnException" value="true" />
 	</bean>
 	
 	<bean id="liquidElasticCachingConnectionFactory"
-		class="org.springframework.jms.connection.CachingConnectionFactory" primary="true">
+		class="org.springframework.jms.connection.CachingConnectionFactory" primary="true" >
 		<property name="targetConnectionFactory" ref="liquidElasticSingleConnectionFactory" />
 		<property name="sessionCacheSize" value="100" />
 	</bean>
