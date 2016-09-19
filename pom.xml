@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pte.liquid.relay</groupId>
 	<artifactId>liquid-elastic</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<scm>
 		<connection>scm:git:https://github.com/rjptegelaar/liquid-elastic.git</connection>
@@ -100,7 +100,7 @@
 		<dependency>
 			<groupId>com.pte.liquid.relay</groupId>
 			<artifactId>RelayInterfaces</artifactId>
-			<version>0.1.14</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
