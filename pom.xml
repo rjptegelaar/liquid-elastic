@@ -1,8 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.pte.liquid.relay</groupId>
+	<groupId>nl.paultegelaar.liquid.relay</groupId>
 	<artifactId>liquid-elastic</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
+	<name>${project.groupId}:${project.artifactId}</name>
 
 	<scm>
 		<connection>scm:git:https://github.com/rjptegelaar/liquid-elastic.git</connection>
@@ -63,6 +64,24 @@
 					<resume>false</resume>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<configuration>						
+							<keyname>paultegelaar</keyname>
+							<passphrase>${gpg-passphrase}</passphrase>		
+												
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>		
 		</plugins>
 	</build>
 
@@ -98,9 +117,9 @@
 		</dependency>
 		<!-- LIQUID -->
 		<dependency>
-			<groupId>com.pte.liquid.relay</groupId>
+			<groupId>nl.paultegelaar.liquid.relay</groupId>
 			<artifactId>RelayInterfaces</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -189,4 +208,21 @@
 			<url>${snapshots-url}</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Paul Tegelaar</name>
+			<email>tegelaarpaul@gmail.com</email>
+			<organization>Paul Tegelaar</organization>
+			<organizationUrl>http://www.paultegelaar.nl</organizationUrl>
+		</developer>
+	</developers>
+	<url>https://github.com/rjptegelaar/liquid-elastic</url>
+	<description>ElasticSearch adapter for Liquid</description>
 </project>
