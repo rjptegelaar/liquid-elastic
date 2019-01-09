@@ -2,14 +2,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.paultegelaar.liquid.relay</groupId>
 	<artifactId>liquid-elastic</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 
 	<scm>
 		<connection>scm:git:https://github.com/rjptegelaar/liquid-elastic.git</connection>
 		<developerConnection>scm:git:git@github.com:rjptegelaar/liquid-elastic.git</developerConnection>
 		<url>https://github.com/rjptegelaar/liquid-elastic.git/</url>
-		<tag>HEAD</tag>
+		<tag>liquid-elastic-1.0.2</tag>
 	</scm>
 
 	<build>
