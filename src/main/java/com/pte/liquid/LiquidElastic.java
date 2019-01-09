@@ -16,7 +16,8 @@ package com.pte.liquid;
 import org.apache.commons.daemon.Daemon;
 import org.apache.commons.daemon.DaemonContext;
 import org.apache.commons.daemon.DaemonInitException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -28,7 +29,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 public class LiquidElastic implements Daemon{
 
 	private static ConfigurableApplicationContext ctx;
-	private final static Logger logger = Logger.getLogger(LiquidElastic.class);	
+	private final static Logger logger = LoggerFactory.getLogger(LiquidElastic.class);	
 
 	public static void main(String[] args) {		
 		buildUp(args);		

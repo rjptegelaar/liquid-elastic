@@ -21,20 +21,23 @@
 				checkForCorruptJournalFiles="true" />
 		</amq:persistenceAdapter>
 		<amq:transportConnectors>
-			<amq:transportConnector uri="tcp://0.0.0.0:${liquid.elastic.broker.jms.port}?wireFormat.maxInactivityDuration=30000&amp;wireFormat.maxInactivityDurationInitalDelay=10000" id="liquidElasticConnector"/>			
+			<amq:transportConnector uri="tcp://0.0.0.0:${liquid.elastic.server.broker.jms.port}?wireFormat.maxInactivityDuration=30000&amp;wireFormat.maxInactivityDurationInitalDelay=10000" id="liquidElasticServerConnector"/>			
+			<amq:transportConnector uri="stomp://0.0.0.0:${liquid.elastic.relay.broker.jms.port}?wireFormat.maxInactivityDuration=30000&amp;wireFormat.maxInactivityDurationInitalDelay=10000" id="liquidElasticRelayConnector"/>
 		</amq:transportConnectors>
 		<amq:plugins>
-			<amq:simpleAuthenticationPlugin anonymousAccessAllowed="false">
+			<amq:simpleAuthenticationPlugin anonymousAccessAllowed="true">
 				<amq:users>
 					<amq:authenticationUser groups="admins" username="${liquid.elastic.admin.username}" password="${liquid.elastic.admin.password}"/>
+					<amq:authenticationUser groups="anonymous" username="" password=""/>
 				</amq:users>				
 			</amq:simpleAuthenticationPlugin>
 			<amq:authorizationPlugin>			
 		        <amq:map>
 		        	<amq:authorizationMap>		          
 		            <amq:authorizationEntries>
-		              <amq:authorizationEntry queue="com.pte.liquid.relay.in" read="admins" write="admins" admin="admins" />		              
-		              <amq:authorizationEntry topic="ActiveMQ.Advisory.>" read="admins" write="admins" admin="admins" />		              		             
+		              <amq:authorizationEntry queue="com.pte.liquid.relay.in" read="admins" write="admins" admin="admins" />
+		              <amq:authorizationEntry queue="com.pte.liquid.relay.json.in" read="anonymous,admins" write="anonymous,admins" admin="admins"/>		              		              
+		              <amq:authorizationEntry topic="ActiveMQ.Advisory.>" read="anonymous,admins" write="anonymous,admins" admin="anonymous,admins" />		              		             
 		            </amq:authorizationEntries>
 		          </amq:authorizationMap>
 		        </amq:map>			
